@@ -15,7 +15,7 @@ CREATE TABLE livros (
 	autor_id  INTEGER,
 		FOREIGN KEY (autor_id) REFERENCES autores(autor_id),
 	editora   VARCHAR (50) NOT NULL,
-	ano_publi CHAR(4),
+	ano_publi DATE,
 	status    VARCHAR (10)
 )
 
@@ -54,9 +54,27 @@ CREATE TABLE devolucao (
 	dias_atraso    INTEGER
 )
 
+drop table autores
+drop table livros
+drop table retirada
+drop table devolucao
+
 select * from usuarios
 select * from livros
 select * from autores
 select * from clientes
 select * from retirada
 select * from devolucao
+
+select * from livros where livro_id = 2 and status = 'disponível'
+update livros set status = 'indisp' where livro_id = 1 returning *
+
+SELECT COUNT(*) FROM livros WHERE livro_id = 1 AND status = 'indisp'
+SELECT COUNT(*) from clientes WHERE matricula = 2 AND livros_retirados >= 3
+
+update clientes set livros_retirados = 4 where matricula = 1 returning *
+
+INSERT INTO retirada(matricula_cliente, livro_id, data_retirada, data_entrega) 
+                                                       VALUES(1, 1, '30-04-2021', '10-05-2021')
+													   
+SELECT livros_retirados FROM clientes WHERE matricula = 2

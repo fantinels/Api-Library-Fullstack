@@ -1,1 +1,11 @@
-﻿
+﻿const express = require('express')
+const controller = require('../controller/cliente_controller')
+
+const router = express.Router()
+
+router.post('/', controller.cadastrarClientes)
+router.get('/:nome', controller.buscarClientePorNome)
+router.get('/matricula/:matricula', controller.buscarClientePorMatricula)
+router.put('/:matricula', controller.atualizarCliente)
+
+module.exports = router
