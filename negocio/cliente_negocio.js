@@ -15,7 +15,7 @@ async function cadastrarClientes(clientes) {
         } catch (error) { throw error }
     } else {
         const erro = new Error()
-        erro.message = "Falta parâmetros deste livro"
+        erro.message = "Falta parâmetros deste cliente"
         erro.status = 400
         throw erro
     }
@@ -51,9 +51,15 @@ async function buscarClientePorMatricula(matricula) {
     } catch (error) { throw error }
 }
 
-async function atualizarCliente(id, clienteUp) {
-    if (clienteUp && clienteUp.nome && clienteUp.telefone) {
-        const clienteAtualizado = await persistencia.atualizarCliente(id, clienteUp)
+async function atualizarCliente(id, cliente) {
+    const nomeExiste = await persistencia.buscarClientePorNome(cliente.nome)
+    if (nomeExiste) {
+        console.log('Nome já cadastrado')
+        return
+    }
+
+    if (cliente && cliente.nome && cliente.telefone) {
+        const clienteAtualizado = await persistencia.atualizarCliente(id, cliente)
 
         if (!clienteAtualizado) {
             let erro = new Error()
@@ -65,15 +71,38 @@ async function atualizarCliente(id, clienteUp) {
         return clienteAtualizado
     } else {
         let erro = new Error()
-        erro.message = "Falta parâmetros deste livro"
+        erro.message = "Falta parâmetros deste cliente"
         erro.status = 400
         throw erro
     }
+}
+
+async function deletarCliente(matricula) {
+    // const livroRetirado = await persistencia.livrosRetirados(matricula)
+    // if (livroRetirado) {
+    //     console.log('Este cliente ainda tem devoluções pendentes ... ')
+    //     return
+    // }
+
+    try {
+        const clienteDel = await persistencia.deletarCliente(matricula)
+        
+        if (!clienteDel) {
+            let erro = new Error()
+            erro.message = "Id do cliente não encontrado"
+            erro.status = 404
+            throw erro 
+        }
+        return clienteDel       
+    } catch (error) { throw error }
+
+        
 }
 
 module.exports = {
    cadastrarClientes,
    buscarClientePorNome,
    buscarClientePorMatricula,
-   atualizarCliente
+   atualizarCliente,
+   deletarCliente
 }

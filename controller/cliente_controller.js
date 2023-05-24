@@ -61,9 +61,25 @@ async function atualizarCliente(req, res) {
     }
 }
 
+async function deletarCliente(req, res) {
+    const matricula = req.params.matricula
+
+    try {
+        const clienteDel = await negocio.deletarCliente(matricula)
+        res.status(200).json(clienteDel)
+    } catch (error) {
+        if (error.status) {
+            res.status(error.status).json(error)
+        } else {
+            res.status(500).json({message: "Erro interno não identificado"})
+        }
+    }
+}
+
 module.exports = {
     cadastrarClientes,
     buscarClientePorNome,
     buscarClientePorMatricula,
-    atualizarCliente
+    atualizarCliente,
+    deletarCliente
 }

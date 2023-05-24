@@ -8,7 +8,7 @@ async function cadastrarAutores(autores) {
         } catch (error) { throw error }
     } else {
         let erro = new Error()
-        erro.message = "Falta parâmetros deste livro"
+        erro.message = "Falta parâmetros deste autor"
         erro.status = 400
         throw erro
     }
@@ -27,7 +27,7 @@ async function buscarAutorPorId(id) {
 
         if (!autorId) {
             let erro = new Error()
-            erro.message = "Id do autor não encontrado"
+            erro.message = "Id do livro não encontrado"
             erro.status = 404
             throw erro
         }
@@ -49,7 +49,7 @@ async function atualizarAutores(id, autores) {
 
         if (!autorAtualizado) {
             let erro = new Error()
-            erro.message = "Id do livro não encontrado"
+            erro.message = "Id do autor não encontrado"
             erro.status = 404
             throw erro
         }
@@ -69,7 +69,7 @@ async function deletarAutores(id) {
 
         if (!autorDel) {
             let erro = new Error()
-            erro.message = "Id do livro não encontrado"
+            erro.message = "Id do autor não encontrado"
             erro.status = 404
             throw erro
         }

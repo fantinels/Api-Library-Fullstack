@@ -31,7 +31,7 @@ async function buscarAutorPorNome(req, res) {
 }
 
 async function buscarAutorPorId(req, res) {
-    const id = req.params.id
+    const id = req.params.autor_id
 
     try {
         const autorId = negocio.buscarAutorPorId(id)

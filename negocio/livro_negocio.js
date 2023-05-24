@@ -1,4 +1,6 @@
 ﻿const persistencia = require('../persistencia/livro_persistencia')
+const autor = require('../persistencia/autor_persistencia')
+
 async function cadastrarLivros(livros) {
 
     const livro = await persistencia.buscarLivroPorIsbn(livros.isbn)
@@ -74,6 +76,25 @@ async function buscarLivros() {
 }
 
 async function atualizarLivro(id, livro) {
+
+    const isbnExiste = await persistencia.buscarLivroPorIsbn(livro.isbn)
+    if (isbnExiste) {
+        console.log('ISBN já cadastrado, tente novamente ...')
+        return
+    }
+
+    const nomeExiste = await persistencia.buscarLivroPorNome(livro.nome)
+    if (nomeExiste) {
+        console.log('NOME já cadastrado, tente novamente ...')
+        return
+    }
+
+    const autorId = await autor.buscarAutorPorId(livro.autor_id)
+    if (!autorId) {
+        console.log('ID do autor não encontrado')
+        return
+    }
+
     if (livro && livro.isbn && livro.nome && livro.autor_id && livro.editora && livro.ano_publi && livro.status) {
         const livroAtualizado = await persistencia.atualizarLivro(id, livro)
         if (!livroAtualizado) {
@@ -92,9 +113,9 @@ async function atualizarLivro(id, livro) {
     }
 }
 
-async function deletarLivro(id) {
+async function deletarLivro(livro_id) {
     try {
-        const livroDel = await persistencia.deletarLivro(id)
+        const livroDel = await persistencia.deletarLivro(livro_id)
 
         if (!livroDel) {
             let erro = new Error()

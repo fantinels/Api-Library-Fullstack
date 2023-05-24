@@ -7,5 +7,6 @@ router.post('/', controller.cadastrarClientes)
 router.get('/:nome', controller.buscarClientePorNome)
 router.get('/matricula/:matricula', controller.buscarClientePorMatricula)
 router.put('/:matricula', controller.atualizarCliente)
+router.delete('/:matricula', controller.deletarCliente)
 
 module.exports = router

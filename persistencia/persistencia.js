@@ -13,20 +13,6 @@ async function retirada(matricula, id_livro) {
     } catch (error) { throw error }
 }
 
-async function buscarDataRetirada(retirada) {
-    const cliente = new Client()
-    cliente.connect()
-
-    try {
-        const sql = `SELECT data_retirada FROM retirada WHERE id_retirada = $1`
-        const values = [retirada]
-        const dataRetirada = await cliente.query(sql, values)
-
-        await cliente.end()
-        return dataRetirada.rows[0].data_retirada
-    } catch (error) { throw error }
-}
-
 async function devolucao(retirada, matricula_cliente, livro_id) {
     const cliente = new Client(conexao)
     cliente.connect()
@@ -41,7 +27,7 @@ async function devolucao(retirada, matricula_cliente, livro_id) {
     } catch (error) { throw error }
 }
 
-async function buscarDataDevolucao(retirada) {
+async function buscarDevolucao(retirada) {
     const cliente = new Client(conexao)
     cliente.connect()
 
@@ -69,27 +55,9 @@ async function buscarRetiradaId(id) {
     } catch (error) { throw error }
 }
 
-async function diasAtraso(retirada) {
-    try {
-        const dataRetirada = await this.buscarDataRetirada(retirada)
-        diasAtrasos = new Date() - dataRetirada
-        diasAtrasos = Math.ceil(diasAtraso / (1000 * 3600 * 24))
-
-        diasAtrasos -= 15
-
-        if (diasAtrasos > 0) {
-            return 0
-        } else {
-            return diasAtrasos
-        }
-    } catch (error) { throw error }
-}
-
 module.exports = {
     retirada,
-    buscarDataRetirada,
     devolucao,
-    buscarDataDevolucao,
-    buscarRetiradaId,
-    diasAtraso
+    buscarDevolucao,
+    buscarRetiradaId
 }

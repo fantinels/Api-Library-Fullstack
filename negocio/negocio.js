@@ -85,7 +85,7 @@ async function devolucao(retiradaId, matricula_cliente, livro_id) {
     }
 
     console.log('Verificando devolução ... ')
-    const devolucaoL = await persistencia.buscarDataDevolucao(retiradaId)
+    const devolucaoL = await persistencia.buscarDevolucao(retiradaId)
     if (devolucaoL) {
         console.log('Devolução já realizada!')
         return
@@ -99,10 +99,11 @@ async function devolucao(retiradaId, matricula_cliente, livro_id) {
 
     console.log('Registrando Devolução ... ')
     const livroDevolvido = await persistencia.devolucao(retiradaId, matricula_cliente, livro_id)
-    
+
     if (livroDevolvido) {
         console.log('Livro Devolvido com Sucesso!')
     }
+     
 }
     
 module.exports = {

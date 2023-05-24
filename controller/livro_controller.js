@@ -92,10 +92,10 @@ async function atualizarLivro(req, res) {
 }
 
 async function deletarLivro(req, res) {
-    const id = req.params.id
+    const livro_id = req.params.livro_id
 
     try {
-        const livroDel = await negocio.deletarLivro(id)
+        const livroDel = await negocio.deletarLivro(livro_id)
         res.status(200).json(livroDel)
     } catch (error) {
         if (error.status) {

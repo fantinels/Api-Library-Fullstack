@@ -140,17 +140,15 @@ async function atualizarLivro(id, livro) {
     } catch (error) { throw error }
 }
 
-async function deletarLivro(id) {
+async function deletarLivro(livro_id) {
     const cliente = new Client(conexao)
     cliente.connect()
 
     try {
-        const sql = `DELETE FROM livros WHERE livro_id = $1 RETURNING *`
-        const values = [id]
-        const livroDeletado = await cliente.query(sql, values)
+        const sql = await cliente.query(`DELETE FROM livros WHERE livro_id = $1 RETURNING *`, [livro_id.livro_id])
 
         await cliente.end()
-        return livroDeletado.rows[0]
+        return sql.rows[0]
     } catch (error) {
         
     }

@@ -102,10 +102,34 @@ async function atualizarCliente(id, clientes) {
     cliente.connect()
 
     try {
-        const sql = await cliente.query(`UPDATE clientes SET nome = $1, telefone = $2 WHERE matricula = $3`, [clientes.nome, clientes.telefone,
-                                                                                                              id])
+        const sql = await cliente.query(`UPDATE clientes SET nome = $1, telefone = $2 WHERE matricula = $3 RETURNING *`, 
+                                            [clientes.nome, clientes.telefone, id])
         await cliente.end()
         return sql.rows[0]
+    } catch (error) { throw error }
+}
+
+async function deletarCliente(matricula) {
+    const cliente = new Client(conexao)
+    cliente.connect()
+
+    try {
+        const sql = await cliente.query(`DELETE FROM clientes WHERE matricula = $1 RETURNING *`, [matricula])
+
+        await cliente.end()
+        return sql.rows[0]
+    } catch (error) { throw error }
+}
+
+async function livrosRetirados(matricula) {
+    const cliente = new Client(conexao)
+    cliente.connect()
+
+    try {
+        const res = await cliente.query(`SELECT * FROM clientes WHERE matricula = $1 AND livros_retirados > 0`, [matricula])
+
+        await cliente.end()
+        return res.rows
     } catch (error) { throw error }
 }
 
@@ -116,5 +140,7 @@ module.exports = {
     reduzLivroCliente,
     buscarClientePorNome,
     buscarClientePorMatricula,
-    atualizarCliente
+    atualizarCliente,
+    deletarCliente,
+    livrosRetirados
 }
