@@ -15,36 +15,6 @@ async function cadastrarAutores(req, res) {
     }
 }
 
-async function buscarAutorPorNome(req, res) {
-    const nome = req.params.nome
-
-    try {
-        const autorNome = await negocio.buscarAutorPorNome(nome)
-        res.status(200).json(autorNome)
-    } catch (error) {
-        if (error.status) {
-            res.status(error.status).json(error)
-        } else {
-            res.status(500).json({message: "Erro interno não identificado"})
-        }
-    }
-}
-
-async function buscarAutorPorId(req, res) {
-    const id = req.params.autor_id
-
-    try {
-        const autorId = negocio.buscarAutorPorId(id)
-        res.status(200).json(autorId)
-    } catch (error) {
-        if (error.status) {
-            res.status(error.status).json(error)
-        } else {
-            res.status(500).json({message: "Erro interno não identificado"})
-        }
-    }
-}
-
 async function buscarAutor(req, res) {
     const autor = req.body
 
@@ -60,42 +30,7 @@ async function buscarAutor(req, res) {
     }
 }
 
-async function atualizarAutores(req, res) {
-    const id = req.params.id
-    const autores = req.body
-
-    try {
-        const autorAtualizado = await negocio.atualizarAutores(id, autores)
-        res.status(200).json(autorAtualizado)
-    } catch (error) {
-        if (error.status) {
-            res.status(error.status).json(error)
-        } else {
-            res.status(500).json({message: "Erro interno não identificado"})
-        }
-    }
-}
-
-async function deletarAutores(req, res) {
-    const id = req.params.id
-
-    try {
-        const autorDel = await negocio.deletarAutores(id)
-        res.status(200).json(autorDel)
-    } catch (error) {
-        if (error.status) {
-            res.status(error.status).json(error)
-        } else {
-            res.status(500).json({message: "Erro interno não identificado"})
-        }
-    }
-}
-
 module.exports = {
     cadastrarAutores,
-    buscarAutorPorNome,
-    buscarAutorPorId,
-    buscarAutor,
-    atualizarAutores,
-    deletarAutores
+    buscarAutor
 }

@@ -41,20 +41,6 @@ async function limiteLivroCliente(matricula) {
     } catch (error) { throw error }
 }
 
-// async function livrosRetirados(matricula) {
-//     const cliente = new Client(conexao)
-//     cliente.connect()
-
-//     try {
-//         const sql = `SELECT livros_retirados FROM clientes WHERE matricula = $1`
-//         const valueLivroRetirado = [matricula]
-//         const livrosRetirados = await cliente.query(sql, valueLivroRetirado)
-
-//         await cliente.end()
-//         return livrosRetirados.rows[0].livros_retirados
-//     } catch (error) { throw error }
-// }
-
 async function reduzLivroCliente(matricula) {
     const cliente = new Client(conexao)
     cliente.connect()
@@ -121,12 +107,12 @@ async function deletarCliente(matricula) {
     } catch (error) { throw error }
 }
 
-async function livrosRetirados(matricula) {
+async function buscarClientes() {
     const cliente = new Client(conexao)
     cliente.connect()
 
     try {
-        const res = await cliente.query(`SELECT * FROM clientes WHERE matricula = $1 AND livros_retirados > 0`, [matricula])
+        const res = await cliente.query(`SELECT * FROM clientes`)
 
         await cliente.end()
         return res.rows
@@ -142,5 +128,5 @@ module.exports = {
     buscarClientePorMatricula,
     atualizarCliente,
     deletarCliente,
-    livrosRetirados
+    buscarClientes
 }

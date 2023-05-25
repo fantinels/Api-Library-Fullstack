@@ -92,16 +92,17 @@ async function atualizarLivro(req, res) {
 }
 
 async function deletarLivro(req, res) {
-    const livro_id = req.params.livro_id
+    const id = req.params.id
 
     try {
-        const livroDel = await negocio.deletarLivro(livro_id)
+        const livroDel = await negocio.deletarLivro(id)
         res.status(200).json(livroDel)
     } catch (error) {
         if (error.status) {
             res.status(error.status).json(error)
         } else {
             res.status(500).json({message: "Erro interno não identificado"})
+            console.log(error)
         }
     }
 }

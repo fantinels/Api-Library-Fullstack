@@ -4,8 +4,7 @@ async function cadastrarClientes(clientes) {
     const cliente = await persistencia.buscarClientePorNome(clientes.nome)
 
     if (cliente) {
-        console.log('Cliente já registrado, por favor tente novamente!')
-        return
+        throw ({status: 400, message: "Cliente já registrado, por favor tente novamente!"})
     }
 
     if (clientes && clientes.nome && clientes.telefone) {
@@ -54,8 +53,7 @@ async function buscarClientePorMatricula(matricula) {
 async function atualizarCliente(id, cliente) {
     const nomeExiste = await persistencia.buscarClientePorNome(cliente.nome)
     if (nomeExiste) {
-        console.log('Nome já cadastrado')
-        return
+        throw ({status: 400, message: "Nome já cadastrado"})
     }
 
     if (cliente && cliente.nome && cliente.telefone) {
@@ -78,12 +76,6 @@ async function atualizarCliente(id, cliente) {
 }
 
 async function deletarCliente(matricula) {
-    // const livroRetirado = await persistencia.livrosRetirados(matricula)
-    // if (livroRetirado) {
-    //     console.log('Este cliente ainda tem devoluções pendentes ... ')
-    //     return
-    // }
-
     try {
         const clienteDel = await persistencia.deletarCliente(matricula)
         
@@ -95,8 +87,14 @@ async function deletarCliente(matricula) {
         }
         return clienteDel       
     } catch (error) { throw error }
-
         
+}
+
+async function buscarClientes() {
+    try {
+        const clientes = await persistencia.buscarClientes()
+        return clientes
+    } catch (error) { throw error }
 }
 
 module.exports = {
@@ -104,5 +102,6 @@ module.exports = {
    buscarClientePorNome,
    buscarClientePorMatricula,
    atualizarCliente,
-   deletarCliente
+   deletarCliente,
+   buscarClientes
 }

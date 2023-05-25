@@ -1,29 +1,28 @@
 ﻿const { Client }  = require('pg')
 const { conexao } = require('./conexao');
 
-async function retirada(matricula, id_livro) {
+async function retirada(matricula, id_livro, data_retirada) {
     const cliente = new Client(conexao)
     cliente.connect()
 
     try {
-        const sql = await cliente.query(`INSERT INTO retirada(matricula_cliente, livro_id) 
-                                                       VALUES($1, $2) RETURNING *`, [matricula, id_livro])
+        const sql = await cliente.query(`INSERT INTO retirada(matricula_cliente, livro_id, data_retirada) 
+                                                       VALUES($1, $2, $3) RETURNING *`, [matricula, id_livro, data_retirada])
         await cliente.end()
         return sql.rows
     } catch (error) { throw error }
 }
 
-async function devolucao(retirada, matricula_cliente, livro_id) {
+async function devolucao(livro_id, data_devolucao, id_retirada, matricula) {
     const cliente = new Client(conexao)
     cliente.connect()
 
     try {
-        const sql = `INSERT INTO devolucao (retirada, matricula_cliente, livro_id) VALUES ($1, $2, $3) RETURNING *`
-        const values = [retirada, matricula_cliente, livro_id]
-        const devolucao = await cliente.query(sql, values)
+        const res = await cliente.query(`INSERT INTO devolucao(livro_id, data_devolucao, id_retirada, matricula) VALUES($1, $2, $3, $4) RETURNING *`, 
+        [livro_id, data_devolucao, id_retirada, matricula])
 
         await cliente.end()
-        return devolucao.rows
+        return res.rows[0]
     } catch (error) { throw error }
 }
 
@@ -32,7 +31,7 @@ async function buscarDevolucao(retirada) {
     cliente.connect()
 
     try {
-        const sql = `SELECT * FROM devolucao WHERE retirada = $1`
+        const sql = `SELECT * FROM devolucao WHERE id_retirada = $1`
         const values = [retirada]
         const dataDevolucao = await cliente.query(sql, values)
 
@@ -55,9 +54,22 @@ async function buscarRetiradaId(id) {
     } catch (error) { throw error }
 }
 
+async function limparRetirada(matricula_cliente) {
+    const cliente = new Client(conexao) 
+    cliente.connect()
+
+    try {
+        const res = await cliente.query(`DELETE FROM retirada WHERE matricula_cliente = $1 RETURNING *`, [matricula_cliente])
+
+        await cliente.end()
+        return res.rows[0]
+    } catch (error) { throw error }
+}
+
 module.exports = {
     retirada,
     devolucao,
     buscarDevolucao,
-    buscarRetiradaId
+    buscarRetiradaId,
+    limparRetirada
 }

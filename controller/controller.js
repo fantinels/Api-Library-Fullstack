@@ -5,7 +5,7 @@ async function retirada(req, res) {
     const livro = req.body
     
     try {
-        const livroRetirado = await negocio.retirada(livro.matricula_cliente, livro.livro_id)
+        const livroRetirado = await negocio.retirada(livro.matricula_cliente, livro.livro_id, livro.data_retirada)
         res.status(201).json(livroRetirado)
     } catch (error) {
         if (error.status) {
@@ -20,7 +20,7 @@ async function devolucao(req, res) {
     const livro = req.body
 
     try {
-        const livroDevolvido = await negocio.devolucao(livro.retirada, livro.matricula_cliente, livro.livro_id)
+        const livroDevolvido = await negocio.devolucao(livro.livro_id, livro.data_devolucao, livro.id_retirada, livro.matricula)
         res.status(201).json(livroDevolvido)
     } catch (error) {
         if (error.status) {

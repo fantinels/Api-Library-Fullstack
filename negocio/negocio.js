@@ -2,13 +2,12 @@
 const persistenciaC = require('../persistencia/cliente_persistencia')
 const persistenciaL = require('../persistencia/livro_persistencia')
 
-async function retirada(matricula_cliente, livro_id) {
+async function retirada(matricula_cliente, livro_id, data_retirada) {
     console.log('Verificando se este livro existe em nosso sistema ...');
     const livroExiste = await persistenciaL.buscarLivroPorId(livro_id)
 
     if (!livroExiste) {
-        console.log('Livro NÃO existente! Tente novamente ...')
-        return 
+        throw ({ status: 404, message: 'Livro NÃO existente! Tente novamente ...' })
     }
     console.log('Livro Existente! Prosseguindo ...')
 
@@ -16,31 +15,28 @@ async function retirada(matricula_cliente, livro_id) {
     const clienteExiste = await persistenciaC.buscarClientePorMatricula(matricula_cliente)
 
     if (!clienteExiste) {
-        console.log('Cadastrado NÃO econtrado! Tente novamente ...')
-        return
+        throw ({ status: 404, message: 'Cadastrado NÃO econtrado! Tente novamente ...' })
     }
     console.log('Cadastrado Econtrado! Prosseguindo ...')
-
-    console.log('Verificando se você ainda tem limite para aluguel de livros ...')
-    const limite = await persistenciaC.limiteLivroCliente(matricula_cliente)
-
-    if (limite) {
-        console.log('Limite máximo de livros alugados atingido ...')
-        return
-    }
-
-    console.log('Limite liberado! Proseguindo ...')
 
     console.log('Verificando se o livro está disponível ...')
     const livroDisp = await persistenciaL.verificarDisponibilidade(livro_id)
 
     if (!livroDisp) {
-        console.log('Livro INDISPONÍVEL! Não pode ser retirado!');
-        return
+        throw ({ status: 400, message: 'Livro INDISPONÍVEL! Não pode ser retirado!' })
     }
 
+    console.log('Verificando se você ainda tem limite para aluguel de livros ...')
+    const limite = await persistenciaC.limiteLivroCliente(matricula_cliente)
+
+    if (limite) {
+        throw ({ status: 400, message: 'Limite máximo de livros alugados atingido ...' })
+    }
+
+    console.log('Limite liberado! Prosseguindo ...')
+
     console.log('Registrando o aluguel do livro ...');
-    const retirada = await persistencia.retirada(matricula_cliente, livro_id)
+    const retirada = await persistencia.retirada(matricula_cliente, livro_id, data_retirada)
 
     if (retirada) {
         console.log('Livro retirado com sucesso');
@@ -61,47 +57,43 @@ async function retirada(matricula_cliente, livro_id) {
     }
 }
 
-async function devolucao(retiradaId, matricula_cliente, livro_id) {
-
-    console.log('Verificando se este livro foi retirado ...')
-    const retiradaLivro = await persistencia.buscarRetiradaId(retiradaId)
-    if (!retiradaLivro) {
-        console.log('Não há retirada registrada para este livro')
-        return
-    }
-
-    console.log('Verificando se cliente existe ... ')
-    const cliente = await persistenciaC.buscarClientePorMatricula(matricula_cliente)
-    if (!cliente) {
-        console.log('Cliente não existe') 
-        return
-    }
+async function devolucao(livro_id, data_devolucao, id_retirada, matricula) {
 
     console.log('Verificando se livro existe ... ')
     const livro = await persistenciaL.buscarLivroPorId(livro_id)
     if (!livro) {
-        console.log('Livro não existe')
-        return
+        throw ({ status: 404, message: 'Livro NÃO existente! Tente novamente ...' })
+    }
+
+    console.log('Verificando se cliente existe ... ')
+    const cliente = await persistenciaC.buscarClientePorMatricula(matricula)
+    if (!cliente) {
+        throw ({ status: 404, message: 'Cadastrado NÃO econtrado! Tente novamente ...' })
+    }
+
+    console.log('Verificando se este livro foi retirado ...')
+    const retiradaLivro = await persistencia.buscarRetiradaId(id_retirada)
+    if (!retiradaLivro) {
+        throw ({status: 404, message: "Não há retirada registrada para este livro"})
     }
 
     console.log('Verificando devolução ... ')
-    const devolucaoL = await persistencia.buscarDevolucao(retiradaId)
+    const devolucaoL = await persistencia.buscarDevolucao(id_retirada)
     if (devolucaoL) {
-        console.log('Devolução já realizada!')
-        return
+        throw ({ status: 400, message: 'Devolução já realizada!' })
     }
 
     console.log('Disponiblizando Livro ... ')
     await persistenciaL.disponibilizaLivro(livro_id)
 
     console.log('Atualizando limite cliente ... ')
-    await persistenciaC.reduzLivroCliente(matricula_cliente)
+    await persistenciaC.reduzLivroCliente(matricula)
 
     console.log('Registrando Devolução ... ')
-    const livroDevolvido = await persistencia.devolucao(retiradaId, matricula_cliente, livro_id)
+    const livroDevolvido = await persistencia.devolucao(livro_id, data_devolucao, id_retirada, matricula)
 
     if (livroDevolvido) {
-        console.log('Livro Devolvido com Sucesso!')
+        throw ({status: 201, message: "Livro Devolvido com Sucesso!"})
     }
      
 }

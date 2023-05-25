@@ -6,14 +6,13 @@ async function cadastrarLivros(livros) {
     const livro = await persistencia.buscarLivroPorIsbn(livros.isbn)
 
     if (livro) {
-        console.log('Livro já cadastrado')
-        return
+        throw ({status: 400, message: "Livro já cadastrado!"})
     }
     
     if (livros && livros.isbn && livros.nome && livros.autor_id && livros.editora && livros.ano_publi) {
         try {
-            const livroInserido = await persistencia.cadastrarLivros(livros)
-            return livroInserido
+            await persistencia.cadastrarLivros(livros)
+            throw ({status: 200, message: "Livro Inserido com sucesso!"})
         } catch (error) { throw error }
     } else {
         let erro = new Error()
@@ -79,20 +78,17 @@ async function atualizarLivro(id, livro) {
 
     const isbnExiste = await persistencia.buscarLivroPorIsbn(livro.isbn)
     if (isbnExiste) {
-        console.log('ISBN já cadastrado, tente novamente ...')
-        return
+        throw ({status: 400, message: "ISBN já cadastrado, tente novamente ..."})
     }
-
+    
     const nomeExiste = await persistencia.buscarLivroPorNome(livro.nome)
     if (nomeExiste) {
-        console.log('NOME já cadastrado, tente novamente ...')
-        return
+        throw ({status: 400, message: "NOME já cadastrado, tente novamente ..."})
     }
-
-    const autorId = await autor.buscarAutorPorId(livro.autor_id)
+    
+    const autorId = await persistencia.buscarAutorPorId(livro.autor_id)
     if (!autorId) {
-        console.log('ID do autor não encontrado')
-        return
+        throw ({status: 404, message: "ID do autor não encontrado"})
     }
 
     if (livro && livro.isbn && livro.nome && livro.autor_id && livro.editora && livro.ano_publi && livro.status) {
@@ -113,14 +109,30 @@ async function atualizarLivro(id, livro) {
     }
 }
 
-async function deletarLivro(livro_id) {
+async function deletarLivro(id) {
     try {
-        const livroDel = await persistencia.deletarLivro(livro_id)
+        const livroDel = await persistencia.deletarLivro(id)
 
         if (!livroDel) {
             let erro = new Error()
             erro.message = "Id do livro não encontrado"
             erro.status = 404
+            throw erro
+        }
+
+        return livroDel
+    } catch (error) { throw error }
+}
+
+async function delAutor(id) {
+    try {
+        const autorDel = await persistencia.delAutor(id)
+
+        if (!autorDel) {
+            let erro = new Error()
+            erro.message = "Id do livro não encontrado"
+            erro.status = 404
+            console.log(erro)
             throw erro
         }
 
@@ -135,5 +147,6 @@ module.exports = {
     buscarLivroPorId,
     buscarLivros,
     atualizarLivro,
-    deletarLivro
+    deletarLivro,
+    delAutor
 }

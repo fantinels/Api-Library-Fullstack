@@ -73,6 +73,9 @@ select * from clientes
 select * from retirada
 select * from devolucao
 
+SELECT * FROM autores WHERE autor_id = 12
+delete from retirada where livro_id = 4
+delete from devolucao where livro_id = 4
 select * from livros where livro_id = 1 and status = 'disponível'
 update livros set status = 'disponível' where livro_id = 1 returning *
 
@@ -91,10 +94,11 @@ delete from autores
 delete from livros
 SELECT DISTINCT nome, pais_origem FROM autores
 
-update clientes set livros_retirados = livros_retirados - 1 where matricula = 14
-select * from clientes
+update clientes set livros_retirados = livros_retirados - 1 where matricula = 15
+
 select * from livros
 select * from autores
+select * from clientes
 select * from retirada
 select * from devolucao
 delete from devolucao
@@ -116,3 +120,14 @@ UPDATE livros SET isbn = '2222222222',
                                        WHERE livro_id = 3 RETURNING *
 									   
 SELECT * FROM clientes WHERE matricula = 15
+
+SELECT retirada.livro_id, 
+                            clientes.matricula as matricula_cli, clientes.nome as nome_cli, clientes.telefone as telefone_cli,
+                            livros.nome
+                            FROM retirada
+                            INNER JOIN clientes ON (retirada.matricula_cliente = clientes.matricula)
+                            INNER JOIN livros   ON (retirada.livro_id = livros.livro_id)
+							
+DELETE FROM retirada WHERE id_retirada = 7 RETURNING *
+
+select * from clientes where livros_retirados > 0

@@ -140,18 +140,40 @@ async function atualizarLivro(id, livro) {
     } catch (error) { throw error }
 }
 
-async function deletarLivro(livro_id) {
+async function deletarLivro(id) {
     const cliente = new Client(conexao)
     cliente.connect()
 
     try {
-        const sql = await cliente.query(`DELETE FROM livros WHERE livro_id = $1 RETURNING *`, [livro_id.livro_id])
+        const sql = await cliente.query(`DELETE FROM livros WHERE livro_id = $1 RETURNING *`, [id])
 
         await cliente.end()
         return sql.rows[0]
-    } catch (error) {
-        
-    }
+    } catch (error) { throw error }
+}
+
+async function delAutor(id) {
+    const cliente = new Client(conexao)
+    cliente.connect()
+
+    try {
+        const res = await cliente.query(`DELETE FROM autores WHERE autor_id = $1 RETURNING *`, [id])
+
+        await cliente.end()
+        return res.rows[0]
+    } catch (error) { throw error }
+}
+
+async function buscarAutorPorId(id) {
+    const cliente = new Client(conexao)
+    cliente.connect()
+
+    try {
+        const res = await cliente.query(`SELECT * FROM autores WHERE autor_id = $1`, [id])
+
+        await cliente.end()
+        return res.rows[0]
+    } catch (error) { throw error }
 }
 
 module.exports = {
@@ -164,5 +186,7 @@ module.exports = {
     disponibilizaLivro,
     buscarLivros,
     atualizarLivro,
-    deletarLivro
+    deletarLivro,
+    buscarAutorPorId,
+    delAutor
 }
