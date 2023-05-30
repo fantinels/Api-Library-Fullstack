@@ -3,9 +3,14 @@
 async function cadastrarLivros(livros) {
 
     const livro = await persistencia.buscarLivroPorIsbn(livros.isbn)
+    const nome = await persistencia.buscarLivroPorNome(livros.nome)
 
     if (livro) {
-        throw ({status: 400, message: "Livro já cadastrado!"})
+        throw ({status: 400, message: "ISBN já cadastrado!"})
+    }
+
+    if (nome) {
+        throw ({status: 400, message: "Nome já cadastrado!"})
     }
     
     if (livros && livros.isbn && livros.nome && livros.autor_id && livros.editora && livros.ano_publi) {

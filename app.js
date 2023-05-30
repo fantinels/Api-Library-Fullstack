@@ -14,11 +14,11 @@ app.use(express.urlencoded({extended:true}));
 
 app.use("/api/login", rotaLogin); 
 
+
+app.use(authMiddleware.verificarToken);
 app.use("/api/aluguel", rota)
 app.use("/api/livros", rotaLivro)
 app.use("/api/autor", rotaAutor)
-
-app.use(authMiddleware.verificarToken);
 app.use("/api/clientes", rotaCliente)
 
 app.listen(port, () => {

@@ -11,10 +11,16 @@
 			"name": "CADASTRAR LIVROS",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODU0ODQyOTYsImV4cCI6MTY4NTQ4Nzg5Nn0._z5EX45vmzseb6c7uSI6T5IVSKVWj7nL69RmTtBz4dw",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"isbn\": \"1010101010\",\r\n    \"nome\": \"O Duque e Eu\",\r\n    \"autor_id\": \"0\",\r\n    \"editora\": \"Rocco\",\r\n    \"ano_publi\": \"2012\",\r\n    \"autores\": {\r\n        \"nome\": \"Julia Queen\",\r\n        \"pais_origem\": \"AF\"\r\n    }\r\n}",
+					"raw": "{\r\n    \"isbn\": \"44444444444\",\r\n    \"nome\": \"O Visconde que me Amava\",\r\n    \"autor_id\": \"0\",\r\n    \"editora\": \"Rocco\",\r\n    \"ano_publi\": \"2012\",\r\n    \"autores\": {\r\n        \"nome\": \"Julia Queen\",\r\n        \"pais_origem\": \"AF\"\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -39,7 +45,13 @@
 			"name": "BUSCAR LIVRO POR NOME",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODU0ODQyOTYsImV4cCI6MTY4NTQ4Nzg5Nn0._z5EX45vmzseb6c7uSI6T5IVSKVWj7nL69RmTtBz4dw",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "localhost:3000/api/livros/nome/Algo Assim Parecidp",
 					"host": [
@@ -60,7 +72,13 @@
 			"name": "BUSCAR LIVRO POR ISBN",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODU0ODQyOTYsImV4cCI6MTY4NTQ4Nzg5Nn0._z5EX45vmzseb6c7uSI6T5IVSKVWj7nL69RmTtBz4dw",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "localhost:3000/api/livros/isbn/7777777777",
 					"host": [
@@ -81,7 +99,13 @@
 			"name": "BUSCAR LIVRO POR ID",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODU0ODQyOTYsImV4cCI6MTY4NTQ4Nzg5Nn0._z5EX45vmzseb6c7uSI6T5IVSKVWj7nL69RmTtBz4dw",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "localhost:3000/api/livros/id/1",
 					"host": [
@@ -102,7 +126,13 @@
 			"name": "BUSCAR LIVROS",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODU0ODQyOTYsImV4cCI6MTY4NTQ4Nzg5Nn0._z5EX45vmzseb6c7uSI6T5IVSKVWj7nL69RmTtBz4dw",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "localhost:3000/api/livros",
 					"host": [
@@ -121,10 +151,16 @@
 			"name": "ATUALIZAR LIVRO",
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODU0ODQyOTYsImV4cCI6MTY4NTQ4Nzg5Nn0._z5EX45vmzseb6c7uSI6T5IVSKVWj7nL69RmTtBz4dw",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"isbn\": \"99999999990\",\r\n    \"nome\": \"Emma\",\r\n    \"autor_id\": \"6\",\r\n    \"editora\": \"Seguinte\",\r\n    \"ano_publi\": \"2020\",\r\n    \"status\": \"disponível\"\r\n}",
+					"raw": "{\r\n    \"isbn\": \"99999999\",\r\n    \"nome\": \"Emmassss\",\r\n    \"autor_id\": \"6\",\r\n    \"editora\": \"Seguinte\",\r\n    \"ano_publi\": \"2020\",\r\n    \"status\": \"disponível\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -132,7 +168,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/api/livros/5",
+					"raw": "localhost:3000/api/livros/7",
 					"host": [
 						"localhost"
 					],
@@ -140,7 +176,7 @@
 					"path": [
 						"api",
 						"livros",
-						"5"
+						"7"
 					]
 				}
 			},
@@ -150,9 +186,15 @@
 			"name": "DELETAR LIVRO",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODU0ODQyOTYsImV4cCI6MTY4NTQ4Nzg5Nn0._z5EX45vmzseb6c7uSI6T5IVSKVWj7nL69RmTtBz4dw",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "localhost:3000/api/livros/5",
+					"raw": "localhost:3000/api/livros/7",
 					"host": [
 						"localhost"
 					],
@@ -160,7 +202,7 @@
 					"path": [
 						"api",
 						"livros",
-						"5"
+						"7"
 					]
 				}
 			},
@@ -170,10 +212,16 @@
 			"name": "RETIRAR LIVROS",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODU0ODQyOTYsImV4cCI6MTY4NTQ4Nzg5Nn0._z5EX45vmzseb6c7uSI6T5IVSKVWj7nL69RmTtBz4dw",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"matricula_cliente\": 1,\r\n    \"livro_id\": 6,\r\n    \"data_retirada\": \"05-04-2023\"\r\n}",
+					"raw": "{\r\n    \"matricula_cliente\": 1,\r\n    \"livro_id\": 9,\r\n    \"data_retirada\": \"11-09-2020\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -199,10 +247,16 @@
 			"name": "DEVOLVER LIVROS",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODU0ODQyOTYsImV4cCI6MTY4NTQ4Nzg5Nn0._z5EX45vmzseb6c7uSI6T5IVSKVWj7nL69RmTtBz4dw",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"livro_id\": 4,\r\n    \"data_devolucao\": \"10-08-2023\",\r\n    \"id_retirada\": 22,\r\n    \"matricula\": 1\r\n}",
+					"raw": "{\r\n    \"livro_id\": 6,\r\n    \"data_devolucao\": \"10-08-2023\",\r\n    \"id_retirada\": 23,\r\n    \"matricula\": 1\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -228,7 +282,13 @@
 			"name": "CADASTRAR AUTORES",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODU0ODQyOTYsImV4cCI6MTY4NTQ4Nzg5Nn0._z5EX45vmzseb6c7uSI6T5IVSKVWj7nL69RmTtBz4dw",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"nome\": \"Coleen Hoover\",\r\n    \"pais_origem\": \"EUA\"\r\n}",
@@ -256,7 +316,13 @@
 			"name": "BUSCAR AUTORES",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODU0ODQyOTYsImV4cCI6MTY4NTQ4Nzg5Nn0._z5EX45vmzseb6c7uSI6T5IVSKVWj7nL69RmTtBz4dw",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "localhost:3000/api/autor",
 					"host": [
@@ -278,7 +344,7 @@
 				"header": [
 					{
 						"key": "auth",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODUxMjU0OTIsImV4cCI6MTY4NTEyOTA5Mn0.dVAdtpjJ-ht1UqktTExD3dctHPAlLqlEdtn8JLYNSXA",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODU0ODQyOTYsImV4cCI6MTY4NTQ4Nzg5Nn0._z5EX45vmzseb6c7uSI6T5IVSKVWj7nL69RmTtBz4dw",
 						"type": "text"
 					}
 				],
@@ -312,7 +378,7 @@
 				"header": [
 					{
 						"key": "auth",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODUxMjU1NjAsImV4cCI6MTY4NTEyOTE2MH0.cU6TPxjx8YtFFMasPQ52J8QXuVEAJjwHLFFsZ51JzsE",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODU0ODQyOTYsImV4cCI6MTY4NTQ4Nzg5Nn0._z5EX45vmzseb6c7uSI6T5IVSKVWj7nL69RmTtBz4dw",
 						"type": "text"
 					}
 				],
@@ -339,12 +405,12 @@
 				"header": [
 					{
 						"key": "auth",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODUxMjU1NjAsImV4cCI6MTY4NTEyOTE2MH0.cU6TPxjx8YtFFMasPQ52J8QXuVEAJjwHLFFsZ51JzsE",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODU0ODQyOTYsImV4cCI6MTY4NTQ4Nzg5Nn0._z5EX45vmzseb6c7uSI6T5IVSKVWj7nL69RmTtBz4dw",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "localhost:3000/api/clientes/matricula/4",
+					"raw": "localhost:3000/api/clientes/matricula/3",
 					"host": [
 						"localhost"
 					],
@@ -353,7 +419,7 @@
 						"api",
 						"clientes",
 						"matricula",
-						"4"
+						"3"
 					],
 					"query": [
 						{
@@ -373,7 +439,7 @@
 				"header": [
 					{
 						"key": "auth",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODUxMjU1NjAsImV4cCI6MTY4NTEyOTE2MH0.cU6TPxjx8YtFFMasPQ52J8QXuVEAJjwHLFFsZ51JzsE",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODU0ODQyOTYsImV4cCI6MTY4NTQ4Nzg5Nn0._z5EX45vmzseb6c7uSI6T5IVSKVWj7nL69RmTtBz4dw",
 						"type": "text"
 					}
 				],
@@ -398,7 +464,7 @@
 				"header": [
 					{
 						"key": "auth",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODUxMjU1NjAsImV4cCI6MTY4NTEyOTE2MH0.cU6TPxjx8YtFFMasPQ52J8QXuVEAJjwHLFFsZ51JzsE",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODU0ODQyOTYsImV4cCI6MTY4NTQ4Nzg5Nn0._z5EX45vmzseb6c7uSI6T5IVSKVWj7nL69RmTtBz4dw",
 						"type": "text"
 					}
 				],
@@ -433,12 +499,12 @@
 				"header": [
 					{
 						"key": "auth",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODUxMjU1NjAsImV4cCI6MTY4NTEyOTE2MH0.cU6TPxjx8YtFFMasPQ52J8QXuVEAJjwHLFFsZ51JzsE",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODU0ODQyOTYsImV4cCI6MTY4NTQ4Nzg5Nn0._z5EX45vmzseb6c7uSI6T5IVSKVWj7nL69RmTtBz4dw",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "localhost:3000/api/clientes/4",
+					"raw": "localhost:3000/api/clientes/6",
 					"host": [
 						"localhost"
 					],
@@ -446,7 +512,7 @@
 					"path": [
 						"api",
 						"clientes",
-						"4"
+						"6"
 					]
 				}
 			},
