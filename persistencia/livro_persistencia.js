@@ -152,18 +152,6 @@ async function deletarLivro(id) {
     } catch (error) { throw error }
 }
 
-async function delAutor(id) {
-    const cliente = new Client(conexao)
-    cliente.connect()
-
-    try {
-        const res = await cliente.query(`DELETE FROM autores WHERE autor_id = $1 RETURNING *`, [id])
-
-        await cliente.end()
-        return res.rows[0]
-    } catch (error) { throw error }
-}
-
 async function buscarAutorPorId(id) {
     const cliente = new Client(conexao)
     cliente.connect()
@@ -187,6 +175,5 @@ module.exports = {
     buscarLivros,
     atualizarLivro,
     deletarLivro,
-    buscarAutorPorId,
-    delAutor
+    buscarAutorPorId
 }

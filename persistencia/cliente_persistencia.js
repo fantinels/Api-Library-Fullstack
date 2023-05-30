@@ -112,7 +112,7 @@ async function buscarClientes() {
     cliente.connect()
 
     try {
-        const res = await cliente.query(`SELECT * FROM clientes`)
+        const res = await cliente.query(`SELECT * FROM clientes ORDER BY matricula`)
 
         await cliente.end()
         return res.rows

@@ -1,5 +1,4 @@
 ﻿const persistencia = require('../persistencia/livro_persistencia')
-const autor = require('../persistencia/autor_persistencia')
 
 async function cadastrarLivros(livros) {
 
@@ -12,7 +11,7 @@ async function cadastrarLivros(livros) {
     if (livros && livros.isbn && livros.nome && livros.autor_id && livros.editora && livros.ano_publi) {
         try {
             await persistencia.cadastrarLivros(livros)
-            throw ({status: 200, message: "Livro Inserido com sucesso!"})
+            throw ({status: 201, message: "Livro Inserido com sucesso!"})
         } catch (error) { throw error }
     } else {
         let erro = new Error()
@@ -70,6 +69,12 @@ async function buscarLivroPorId(livro_id) {
 async function buscarLivros() {
     try {
         let livro = await persistencia.buscarLivros()
+        if (livro.length == 0   ) {
+            let erro = new Error()
+            erro.message = "Nenhum livro encontrado"
+            erro.status = 404
+            throw erro
+        }
         return livro
     } catch (error) { throw error }
 }
@@ -124,22 +129,6 @@ async function deletarLivro(id) {
     } catch (error) { throw error }
 }
 
-async function delAutor(id) {
-    try {
-        const autorDel = await persistencia.delAutor(id)
-
-        if (!autorDel) {
-            let erro = new Error()
-            erro.message = "Id do livro não encontrado"
-            erro.status = 404
-            console.log(erro)
-            throw erro
-        }
-
-        return livroDel
-    } catch (error) { throw error }
-}
-
 module.exports = {
     cadastrarLivros,
     buscarLivroPorNome,
@@ -147,6 +136,5 @@ module.exports = {
     buscarLivroPorId,
     buscarLivros,
     atualizarLivro,
-    deletarLivro,
-    delAutor
-}
+    deletarLivro
+}   

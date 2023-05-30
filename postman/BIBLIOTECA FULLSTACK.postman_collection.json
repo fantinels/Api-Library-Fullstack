@@ -1,0 +1,484 @@
+{
+	"info": {
+		"_postman_id": "0b9a34f5-02f4-4721-ae15-f24065684835",
+		"name": "BIBLIOTECA FULLSTACK",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24811078",
+		"_collection_link": "https://speeding-crescent-323193.postman.co/workspace/My-Workspace~4f512c37-86eb-4897-8e5e-958abe2f4f47/collection/24811078-0b9a34f5-02f4-4721-ae15-f24065684835?action=share&creator=24811078&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "CADASTRAR LIVROS",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"isbn\": \"1010101010\",\r\n    \"nome\": \"O Duque e Eu\",\r\n    \"autor_id\": \"0\",\r\n    \"editora\": \"Rocco\",\r\n    \"ano_publi\": \"2012\",\r\n    \"autores\": {\r\n        \"nome\": \"Julia Queen\",\r\n        \"pais_origem\": \"AF\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/livros",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"livros"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BUSCAR LIVRO POR NOME",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/livros/nome/Algo Assim Parecidp",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"livros",
+						"nome",
+						"Algo Assim Parecidp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BUSCAR LIVRO POR ISBN",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/livros/isbn/7777777777",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"livros",
+						"isbn",
+						"7777777777"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BUSCAR LIVRO POR ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/livros/id/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"livros",
+						"id",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BUSCAR LIVROS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/livros",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"livros"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ATUALIZAR LIVRO",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"isbn\": \"99999999990\",\r\n    \"nome\": \"Emma\",\r\n    \"autor_id\": \"6\",\r\n    \"editora\": \"Seguinte\",\r\n    \"ano_publi\": \"2020\",\r\n    \"status\": \"disponível\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/livros/5",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"livros",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETAR LIVRO",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/livros/5",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"livros",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RETIRAR LIVROS",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"matricula_cliente\": 1,\r\n    \"livro_id\": 6,\r\n    \"data_retirada\": \"05-04-2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/aluguel/retirada",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"aluguel",
+						"retirada"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEVOLVER LIVROS",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"livro_id\": 4,\r\n    \"data_devolucao\": \"10-08-2023\",\r\n    \"id_retirada\": 22,\r\n    \"matricula\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/aluguel/devolucao",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"aluguel",
+						"devolucao"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CADASTRAR AUTORES",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Coleen Hoover\",\r\n    \"pais_origem\": \"EUA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/autor",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"autor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BUSCAR AUTORES",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/autor",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"autor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CADASTRAR CLIENTES",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODUxMjU0OTIsImV4cCI6MTY4NTEyOTA5Mn0.dVAdtpjJ-ht1UqktTExD3dctHPAlLqlEdtn8JLYNSXA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Fernanda Souza\",\r\n    \"telefone\": \"(51) 3333-4444\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/clientes",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BUSCAR CLIENTE POR NOME",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODUxMjU1NjAsImV4cCI6MTY4NTEyOTE2MH0.cU6TPxjx8YtFFMasPQ52J8QXuVEAJjwHLFFsZ51JzsE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/clientes/nome/Pablo Antonio",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"clientes",
+						"nome",
+						"Pablo Antonio"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BUSCAR CLIENTE POR MATRICULA",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODUxMjU1NjAsImV4cCI6MTY4NTEyOTE2MH0.cU6TPxjx8YtFFMasPQ52J8QXuVEAJjwHLFFsZ51JzsE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/clientes/matricula/4",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"clientes",
+						"matricula",
+						"4"
+					],
+					"query": [
+						{
+							"key": "auth",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODUxMjExMjYsImV4cCI6MTY4NTEyNDcyNn0.1jThl8gJAar125i7af4eaCiSLTun-g66vrWRIUlq8Jo",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BUSCAR CLIENTES",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODUxMjU1NjAsImV4cCI6MTY4NTEyOTE2MH0.cU6TPxjx8YtFFMasPQ52J8QXuVEAJjwHLFFsZ51JzsE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/clientes",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ATUALIZAR CLIENTES",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODUxMjU1NjAsImV4cCI6MTY4NTEyOTE2MH0.cU6TPxjx8YtFFMasPQ52J8QXuVEAJjwHLFFsZ51JzsE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Fernanda Souza Lima\",\r\n    \"telefone\": \"(51) 95555-6666\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/clientes/5",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"clientes",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETAR CLIENTES",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODUxMjU1NjAsImV4cCI6MTY4NTEyOTE2MH0.cU6TPxjx8YtFFMasPQ52J8QXuVEAJjwHLFFsZ51JzsE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/clientes/4",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"clientes",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GERAR TOKEN",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"usuario\": \"admin\",\r\n    \"senha\": \"12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

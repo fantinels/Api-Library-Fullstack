@@ -17,6 +17,13 @@ async function cadastrarAutores(autores) {
 async function buscarAutor() {
     try {
         const autor = await persistencia.buscarAutor()
+
+        if (autor.length == 0) {
+            let erro = new Error()
+            erro.message = "Nenhum autor encontrado"
+            erro.status = 404
+            throw erro
+        }
         return autor
     } catch (error) { throw error }
 }

@@ -93,6 +93,13 @@ async function deletarCliente(matricula) {
 async function buscarClientes() {
     try {
         const clientes = await persistencia.buscarClientes()
+
+        if (clientes.length == 0) {
+            let erro = new Error()
+            erro.message = "Nenhum cliente encontrado"
+            erro.status = 404
+            throw erro
+        }
         return clientes
     } catch (error) { throw error }
 }

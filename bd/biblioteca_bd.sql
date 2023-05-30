@@ -15,7 +15,7 @@ CREATE TABLE livros (
 	autor_id  INTEGER,
 		FOREIGN KEY (autor_id) REFERENCES autores(autor_id),
 	editora   VARCHAR (50) NOT NULL,
-	ano_publi DATE,
+	ano_publi CHAR(4),
 	status    VARCHAR (20)
 )
 
@@ -43,91 +43,30 @@ CREATE TABLE retirada (
 		FOREIGN KEY (livro_id) REFERENCES livros(livro_id),
 	data_retirada 	  CHAR(10)
 )
-ALTER TABLE retirada ADD COLUMN data_retirada CHAR(10)
 
 -- Devolução de Livros
 CREATE TABLE devolucao (
 	id_devolucao   SERIAL PRIMARY KEY,
-	retirada       INTEGER,
-		FOREIGN KEY (retirada) REFERENCES retirada(id_retirada),
-	data_devolucao CHAR(10),
-	matricula_cliente INTEGER,
-		FOREIGN KEY (matricula_cliente) REFERENCES clientes(matricula),
 	livro_id INTEGER,
-		FOREIGN KEY (livro_id) REFERENCES livros(livro_id)
+		FOREIGN KEY (livro_id) REFERENCES livros(livro_id),
+	data_devolucao CHAR(10),
+	id_retirada INTEGER,
+		FOREIGN KEY (id_retirada) REFERENCES retirada(id_retirada),
+	matricula   INTEGER,
+		FOREIGN KEY (matricula) REFERENCES clientes(matricula)
 )
-ALTER TABLE devolucao DROP COLUMN data_devolucao
 
-ALTER TABLE devolucao ADD CONSTRAINT livro_id FOREIGN KEY (livro_id) REFERENCES livros(livro_id)
-FOREIGN KEY (matricula_cliente) REFERENCES clientes(matricula)
+alter table devolucao add column matricula integer
 
+drop table clientes
 drop table autores
 drop table livros
 drop table retirada
 drop table devolucao
 
 select * from usuarios
-select * from livros
+select * from livros order by livro_id
 select * from autores
 select * from clientes
 select * from retirada
 select * from devolucao
-
-SELECT * FROM autores WHERE autor_id = 12
-delete from retirada where livro_id = 4
-delete from devolucao where livro_id = 4
-select * from livros where livro_id = 1 and status = 'disponível'
-update livros set status = 'disponível' where livro_id = 1 returning *
-
-SELECT COUNT(*) FROM livros WHERE livro_id = 1 AND status = 'disponível'
-SELECT * from clientes WHERE matricula = 9 AND livros_retirados >= 3
-
-update clientes set livros_retirados = 4 where matricula = 1 returning *
-
-INSERT INTO retirada(matricula_cliente, livro_id) 
-                                                       VALUES(5, 2)
-													   
-SELECT livros_retirados FROM clientes WHERE matricula = 4
-delete from retirada
-delete from clientes
-delete from autores
-delete from livros
-SELECT DISTINCT nome, pais_origem FROM autores
-
-update clientes set livros_retirados = livros_retirados - 1 where matricula = 15
-
-select * from livros
-select * from autores
-select * from clientes
-select * from retirada
-select * from devolucao
-delete from devolucao
-
-UPDATE clientes SET livros_retirados = livros_retirados - 1 WHERE matricula = 14 RETURNING *
-insert into autores(nome, pais_origem) values ('coleen hoover', 'eua')
-select distinct nome, pais_origem from autores WHERE autor_id = 
-
-insert into retirada(matricula_cliente, livro_id, data_retirada) values (11, 1, CURRENT_DATE)
-SELECT * FROM clientes WHERE matricula = 15
-SELECT * FROM retirada WHERE id_retirada = 100
-
-UPDATE livros SET isbn = '2222222222',
-                  nome = 'Verity',
-                  autor_id  = 1,
-                  editora   = 'Rocco',
-                  ano_publi = '03-05-2021',
-                  status    = 'disponível'
-                                       WHERE livro_id = 3 RETURNING *
-									   
-SELECT * FROM clientes WHERE matricula = 15
-
-SELECT retirada.livro_id, 
-                            clientes.matricula as matricula_cli, clientes.nome as nome_cli, clientes.telefone as telefone_cli,
-                            livros.nome
-                            FROM retirada
-                            INNER JOIN clientes ON (retirada.matricula_cliente = clientes.matricula)
-                            INNER JOIN livros   ON (retirada.livro_id = livros.livro_id)
-							
-DELETE FROM retirada WHERE id_retirada = 7 RETURNING *
-
-select * from clientes where livros_retirados > 0

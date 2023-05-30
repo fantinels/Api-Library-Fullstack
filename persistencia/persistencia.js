@@ -54,22 +54,9 @@ async function buscarRetiradaId(id) {
     } catch (error) { throw error }
 }
 
-async function limparRetirada(matricula_cliente) {
-    const cliente = new Client(conexao) 
-    cliente.connect()
-
-    try {
-        const res = await cliente.query(`DELETE FROM retirada WHERE matricula_cliente = $1 RETURNING *`, [matricula_cliente])
-
-        await cliente.end()
-        return res.rows[0]
-    } catch (error) { throw error }
-}
-
 module.exports = {
     retirada,
     devolucao,
     buscarDevolucao,
-    buscarRetiradaId,
-    limparRetirada
+    buscarRetiradaId
 }
